@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+    <div class="form-section" style="max-width: 420px; margin: 40px auto;">
+        <h1 style="text-align:center;">Create Account</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" style="width:100%;">Sign Up</button>
+        </form>
+        <p style="text-align:center; margin-top:16px; font-size:14px; color:var(--slate);">
+            Already have an account? <a href="{% url 'login' %}">Login</a>
+        </p>
+    </div>
+{% endblock %}

@@ -1,0 +1,495 @@
+/* ===== Base ===== */
+:root {
+    --ink: #E8E6E1;
+    --paper: #14181F;
+    --paper-alt: #1C222C;
+    --slate: #8A93A3;
+    --gold: #C9A36A;
+    --success: #4CAF7D;
+    --error: #E06B4A;
+    --border: #313A47;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Lora', Georgia, serif;
+    color: var(--ink);
+    margin-top: 0;
+}
+
+h1 { font-size: 28px; }
+h2 {
+    font-size: 19px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+    margin-bottom: 16px;
+    margin-top: 32px;
+}
+
+a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+}
+a:hover { color: var(--ink); }
+
+/* ===== Layout ===== */
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--paper-alt);
+}
+.topbar .brand {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topbar a { border-bottom: none; color: var(--slate); font-size: 14px; margin-left: 16px; }
+.topbar a:hover { color: var(--gold); }
+
+/* ===== Forms ===== */
+form p { margin-bottom: 14px; }
+label { display: block; font-size: 13px; color: var(--slate); margin-bottom: 4px; font-weight: 600; }
+
+input[type=text], input[type=email], input[type=password], input[type=url], input[type=tel], textarea, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--paper-alt);
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink);
+}
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,163,106,0.15);
+}
+textarea { min-height: 80px; resize: vertical; }
+
+button, .btn {
+    background: var(--gold);
+    color: #14181F;
+    border: none;
+    padding: 11px 22px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+}
+button:hover, .btn:hover { background: var(--ink); }
+
+.btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border);
+}
+.btn-secondary:hover { background: var(--paper-alt); border-color: var(--gold); }
+
+/* ===== Form Sections (create/edit resume) ===== */
+.form-section {
+    background: var(--paper-alt);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.formset-item {
+    border-left: 3px solid var(--gold);
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    background: var(--paper);
+    border-radius: 0 4px 4px 0;
+}
+
+/* ===== Dashboard Cards ===== */
+.resume-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.resume-card {
+    position: relative;
+    background: var(--paper-alt);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.2), 4px 4px 0 rgba(0,0,0,0.1);
+    transition: transform 0.15s ease;
+}
+.resume-card:hover { transform: translateY(-3px); }
+
+.resume-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 18px 18px 0;
+    border-color: transparent var(--gold) transparent transparent;
+}
+
+.resume-card h3 {
+    font-size: 16px;
+    margin: 0 0 6px 0;
+    color: var(--ink);
+}
+.resume-card .date {
+    font-size: 12px;
+    color: var(--slate);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--slate);
+}
+
+/* ===== Detail Page ===== */
+.detail-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+.detail-actions a {
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 4px;
+    color: var(--ink);
+    font-size: 13px;
+}
+.detail-actions a:hover { border-color: var(--gold); color: var(--gold); }
+
+.field-row { margin-bottom: 8px; }
+.field-row strong { color: var(--slate); font-weight: 600; margin-right: 6px; }
+
+ul.clean-list { list-style: none; padding: 0; margin: 0; }
+ul.clean-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+ul.clean-list li:last-child { border-bottom: none; }
+/* ===== Animations ===== */
+
+/* Page content fade-in on load */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Stagger the resume cards slightly for a nicer entrance */
+.resume-card {
+    animation: fadeInUp 0.4s ease-out backwards;
+}
+.resume-grid .resume-card:nth-child(1) { animation-delay: 0.05s; }
+.resume-grid .resume-card:nth-child(2) { animation-delay: 0.1s; }
+.resume-grid .resume-card:nth-child(3) { animation-delay: 0.15s; }
+.resume-grid .resume-card:nth-child(4) { animation-delay: 0.2s; }
+.resume-grid .resume-card:nth-child(5) { animation-delay: 0.25s; }
+.resume-grid .resume-card:nth-child(6) { animation-delay: 0.3s; }
+
+/* Smooth transitions everywhere they matter */
+.resume-card, button, .btn, .detail-actions a, a, input, textarea, select {
+    transition: all 0.2s ease;
+}
+
+/* Button press feedback */
+button:active, .btn:active {
+    transform: scale(0.97);
+}
+
+/* Underline sweep on nav links */
+.topbar a {
+    position: relative;
+}
+.topbar a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -3px;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.2s ease;
+}
+.topbar a:hover::after {
+    width: 100%;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .container, .resume-card {
+        animation: none;
+    }
+    * {
+        transition: none !important;
+    }
+}
+/* ===== More Animation ===== */
+
+/* Stagger form sections on create/edit page */
+.form-section {
+    animation: fadeInUp 0.4s ease-out backwards;
+}
+form .form-section:nth-of-type(1) { animation-delay: 0.05s; }
+form .form-section:nth-of-type(2) { animation-delay: 0.1s; }
+form .form-section:nth-of-type(3) { animation-delay: 0.15s; }
+form .form-section:nth-of-type(4) { animation-delay: 0.2s; }
+form .form-section:nth-of-type(5) { animation-delay: 0.25s; }
+form .form-section:nth-of-type(6) { animation-delay: 0.3s; }
+
+/* Card hover — deeper lift + corner fold grows */
+.resume-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.resume-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 3px 4px 0 rgba(0,0,0,0.25), 6px 8px 0 rgba(0,0,0,0.12);
+}
+.resume-card::before {
+    transition: border-width 0.25s ease;
+}
+.resume-card:hover::before {
+    border-width: 0 26px 26px 0;
+}
+
+/* Input focus glow pulse */
+@keyframes focusGlow {
+    0% { box-shadow: 0 0 0 0 rgba(201,163,106,0.35); }
+    100% { box-shadow: 0 0 0 6px rgba(201,163,106,0); }
+}
+input:focus, textarea:focus, select:focus {
+    animation: focusGlow 0.6s ease-out;
+}
+
+/* Button shine sweep on hover */
+button, .btn {
+    position: relative;
+    overflow: hidden;
+}
+button::after, .btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+}
+button:hover::after, .btn:hover::after {
+    left: 125%;
+}
+
+/* h1 gentle letter-spacing expand on load */
+@keyframes titleReveal {
+    from { opacity: 0; letter-spacing: -1px; }
+    to { opacity: 1; letter-spacing: normal; }
+}
+h1 {
+    animation: titleReveal 0.6s ease-out;
+}
+
+/* Gold underline under h2 grows on load instead of appearing instantly */
+@keyframes underlineGrow {
+    from { border-bottom-color: transparent; }
+    to { border-bottom-color: var(--gold); }
+}
+h2 {
+    animation: underlineGrow 0.8s ease-out 0.2s backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .form-section, h1, h2 {
+        animation: none;
+    }
+}
+/* ===== Background Ambience ===== */
+body {
+    background-image:
+        radial-gradient(circle at 15% 0%, rgba(201,163,106,0.08), transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(95,168,160,0.06), transparent 35%),
+        radial-gradient(circle at 50% 100%, rgba(76,88,110,0.1), transparent 50%),
+        repeating-linear-gradient(135deg, rgba(201,163,106,0.035) 0px, rgba(201,163,106,0.035) 1px, transparent 1px, transparent 24px),
+        radial-gradient(rgba(201,163,106,0.22) 1.5px, transparent 1.5px);
+    background-size: auto, auto, auto, auto, 24px 24px;
+    background-color: var(--paper);
+    background-attachment: fixed;
+}
+
+/* ===== Header Redesign ===== */
+.topbar {
+    position: relative;
+    background: var(--paper);
+    border-bottom: none;
+    padding: 18px 28px;
+}
+
+.topbar::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+}
+
+.topbar .brand {
+    font-size: 19px;
+    letter-spacing: 0.3px;
+}
+
+.topbar .brand img {
+    filter: drop-shadow(0 0 4px rgba(201,163,106,0.4));
+}
+/* ===== Landing Page Enhancements ===== */
+
+.hero-title {
+    background: linear-gradient(120deg, var(--ink) 30%, var(--gold) 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: fadeInUp 0.7s ease-out, shimmer 4s ease-in-out infinite;
+    background-size: 200% auto;
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+}
+
+.feature-card {
+    background: var(--paper-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    animation: fadeInUp 0.5s ease-out backwards;
+}
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+    box-shadow: 0 8px 24px rgba(201,163,106,0.12);
+}
+
+.feature-icon {
+    font-size: 28px;
+    display: inline-block;
+    margin-bottom: 10px;
+    animation: float 3s ease-in-out infinite;
+}
+.feature-card:nth-child(2) .feature-icon { animation-delay: 0.3s; }
+.feature-card:nth-child(3) .feature-icon { animation-delay: 0.6s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.cta-btn {
+    position: relative;
+    box-shadow: 0 4px 20px rgba(201,163,106,0.25);
+}
+.cta-btn:hover {
+    box-shadow: 0 6px 28px rgba(201,163,106,0.4);
+}
+
+.site-footer {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+    border-top: 1px solid var(--border);
+    color: var(--slate);
+    font-size: 13px;
+}
+/* ===== Extra Color Accents ===== */
+:root {
+    --teal: #5FA8A0;
+    --rose: #C97B7B;
+}
+
+/* Alternate colors on feature card icons for variety */
+.feature-card:nth-child(1) .feature-icon { color: var(--gold); }
+.feature-card:nth-child(2) .feature-icon { color: var(--teal); }
+.feature-card:nth-child(3) .feature-icon { color: var(--rose); }
+
+.feature-card:nth-child(2):hover { border-color: var(--teal); box-shadow: 0 8px 24px rgba(95,168,160,0.15); }
+.feature-card:nth-child(3):hover { border-color: var(--rose); box-shadow: 0 8px 24px rgba(201,123,123,0.15); }
+
+/* Colorful section headings on resume detail page - alternate accent per section */
+.field-row strong { color: var(--teal); }
+
+/* Skill tags as colorful pills instead of plain list */
+.skill-pill {
+    display: inline-block;
+    background: rgba(201,163,106,0.12);
+    color: var(--gold);
+    border: 1px solid rgba(201,163,106,0.3);
+    padding: 5px 14px;
+    border-radius: 16px;
+    font-size: 13px;
+    margin: 3px 4px 3px 0;
+}
+
+/* Status-style badges for template type on dashboard cards */
+.template-badge {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-top: 6px;
+}
+.badge-classic { background: rgba(201,163,106,0.15); color: var(--gold); }
+.badge-modern { background: rgba(95,168,160,0.15); color: var(--teal); }
+.badge-minimal { background: rgba(201,123,123,0.15); color: var(--rose); }
+
+/* Colorful gradient border accent on form-section hover */
+.form-section:hover {
+    border-image: linear-gradient(120deg, var(--gold), var(--teal), var(--rose)) 1;
+}
+/* ===== 3D Tilt Effect ===== */
+.resume-card, .feature-card {
+    transform-style: preserve-3d;
+    perspective: 800px;
+    will-change: transform;
+}
+
+.resume-card, .feature-card {
+    transition: transform 0.15s ease-out, box-shadow 0.25s ease;
+}

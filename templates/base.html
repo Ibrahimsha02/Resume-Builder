@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Resume Builder{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="topbar">
+    <div class="brand">
+    <img src="{% static 'images/logo.svg' %}" alt="Resume Builder logo" style="height: 24px; vertical-align: middle; margin-right: 8px;">
+    Resume Builder <span style="font-size:14px; opacity:0.7;">✨</span>
+</div>
+        <div>
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+               <form method="post" action="{% url 'logout' %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" style="background:none; border:none; color:var(--slate); font-size:14px; cursor:pointer; padding:0; margin-left:16px; font-family:inherit;">Logout</button>
+</form>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'signup' %}">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const tiltCards = document.querySelectorAll('.resume-card, .feature-card');
+
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', function (e) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
+
+            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.02)`;
+        });
+
+        card.addEventListener('mouseleave', function () {
+            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
+        });
+    });
+});
+</script>
+
+</body>
+</html>

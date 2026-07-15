@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Delete Resume{% endblock %}
+
+{% block content %}
+    <div class="form-section" style="max-width: 480px; margin: 40px auto; text-align:center;">
+        <h1>Delete "{{ resume.title }}"?</h1>
+        <p style="color:var(--slate);">This action cannot be undone.</p>
+        <form method="post" style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
+            {% csrf_token %}
+            <button type="submit" style="background:var(--error);">Yes, Delete</button>
+            <a href="{% url 'resume_detail' resume.id %}" class="btn btn-secondary" style="padding:11px 22px; border-radius:4px;">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

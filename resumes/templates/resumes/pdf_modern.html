@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body { font-family: Helvetica, Arial, sans-serif; font-size: 10px; color: #222; margin: 0; }
+    table { width: 100%; border-collapse: collapse; }
+    .sidebar { background: #1B2430; color: #fff; width: 32%; padding: 20px 14px; vertical-align: top; }
+    .main { width: 68%; padding: 20px 18px; vertical-align: top; }
+    .name { font-size: 20px; font-weight: bold; margin-bottom: 4px; }
+    .role { font-size: 11px; color: #B08D57; margin-bottom: 16px; }
+    .sidebar h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #B08D57; border-bottom: 1px solid #445; padding-bottom: 4px; margin-top: 18px; }
+    .sidebar p, .sidebar li { font-size: 9.5px; color: #E5E5E5; line-height: 1.5; }
+    .main h2 { font-size: 13px; color: #1B2430; border-bottom: 2px solid #B08D57; padding-bottom: 3px; margin-top: 16px; }
+    .item-title { font-weight: bold; }
+    .item-sub { color: #666; font-size: 9px; }
+    ul { margin: 4px 0; padding-left: 14px; }
+</style>
+</head>
+<body>
+<table>
+<tr>
+    <td class="sidebar">
+        <div class="name">{{ resume.personal_info.full_name }}</div>
+
+        <h3>Contact</h3>
+        <p>{{ resume.personal_info.email }}<br>
+        {{ resume.personal_info.phone }}<br>
+        {{ resume.personal_info.location }}</p>
+        {% if resume.personal_info.linkedin %}<p>{{ resume.personal_info.linkedin }}</p>{% endif %}
+        {% if resume.personal_info.github %}<p>{{ resume.personal_info.github }}</p>{% endif %}
+
+        {% if resume.skills.all %}
+        <h3>Skills</h3>
+        <ul>
+        {% for skill in resume.skills.all %}<li>{{ skill.name }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+
+      {% if resume.certifications.all %}
+        <h3>Certifications</h3>
+        <ul>
+        {% for cert in resume.certifications.all %}<li>{{ cert.name }} {% if cert.year %}({{ cert.year }}){% endif %}</li>{% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if resume.languages.all %}
+        <h3>Languages</h3>
+        <ul>
+        {% for lang in resume.languages.all %}<li>{{ lang.name }} {% if lang.proficiency %}({{ lang.proficiency }}){% endif %}</li>{% endfor %}
+        </ul>
+        {% endif %}
+    </td>
+    <td class="main">
+        {% if resume.personal_info.summary %}
+        <h2>Summary</h2>
+        <p>{{ resume.personal_info.summary }}</p>
+        {% endif %}
+
+        {% if resume.experience.all %}
+        <h2>Experience</h2>
+        {% for exp in resume.experience.all %}
+        <p><span class="item-title">{{ exp.role }}</span> — {{ exp.company }}<br>
+        <span class="item-sub">{{ exp.duration }}</span><br>
+        {{ exp.description }}</p>
+        {% endfor %}
+        {% endif %}
+
+        {% if resume.education.all %}
+        <h2>Education</h2>
+        {% for edu in resume.education.all %}
+        <p><span class="item-title">{{ edu.degree }}</span> — {{ edu.institution }}<br>
+        <span class="item-sub">{{ edu.year }} {% if edu.score %}| {{ edu.score }}{% endif %}</span></p>
+        {% endfor %}
+        {% endif %}
+
+        {% if resume.projects.all %}
+        <h2>Projects</h2>
+        {% for project in resume.projects.all %}
+        <p><span class="item-title">{{ project.title }}</span> {% if project.tech_stack %}— {{ project.tech_stack }}{% endif %}<br>
+        {{ project.description }}
+        {% if project.link %}<br><span class="item-sub">{{ project.link }}</span>{% endif %}</p>
+        {% endfor %}
+        {% endif %}
+
+        {% if resume.achievements.all %}
+        <h2>Achievements</h2>
+        <ul>
+        {% for a in resume.achievements.all %}<li>{{ a.title }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+    </td>
+</tr>
+</table>
+</body>
+</html>

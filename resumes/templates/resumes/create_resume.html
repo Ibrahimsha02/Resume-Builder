@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Create Resume{% endblock %}
+
+{% block content %}
+    <h1>Create New Resume</h1>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-section">
+            <h2>Resume Title</h2>
+            {{ resume_form.as_p }}
+        </div>
+
+        <div class="form-section">
+            <h2>Personal Info</h2>
+            {{ personal_form.as_p }}
+        </div>
+
+        <div class="form-section">
+            <h2>Education</h2>
+            {{ education_formset.management_form }}
+            {% for form in education_formset %}
+                <div class="formset-item">{{ form.as_p }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-section">
+            <h2>Experience</h2>
+            {{ experience_formset.management_form }}
+            {% for form in experience_formset %}
+                <div class="formset-item">{{ form.as_p }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-section">
+            <h2>Skills</h2>
+            {{ skill_formset.management_form }}
+            {% for form in skill_formset %}
+                <div class="formset-item">{{ form.as_p }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-section">
+            <h2>Projects</h2>
+            {{ project_formset.management_form }}
+            {% for form in project_formset %}
+                <div class="formset-item">{{ form.as_p }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-section">
+            <h2>Certifications</h2>
+            {{ certification_formset.management_form }}
+            {% for form in certification_formset %}
+                <div class="formset-item">{{ form.as_p }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-section">
+            <h2>Achievements</h2>
+            {{ achievement_formset.management_form }}
+            {% for form in achievement_formset %}
+                <div class="formset-item">{{ form.as_p }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="form-section">
+            <h2>Languages</h2>
+            {{ language_formset.management_form }}
+            {% for form in language_formset %}
+                <div class="formset-item">{{ form.as_p }}</div>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Save Resume</button>
+    </form>
+{% endblock %}

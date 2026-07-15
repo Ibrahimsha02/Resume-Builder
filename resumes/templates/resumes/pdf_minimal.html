@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body { font-family: Helvetica, Arial, sans-serif; font-size: 10.5px; color: #333; padding: 10px 30px; }
+    h1 { font-size: 24px; font-weight: normal; letter-spacing: 1px; margin-bottom: 2px; }
+    .contact { font-size: 9.5px; color: #888; margin-bottom: 24px; }
+    h2 { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #999; font-weight: normal; margin-top: 22px; margin-bottom: 10px; }
+    .item { margin-bottom: 14px; }
+    .item-title { font-weight: bold; font-size: 11px; }
+    .item-sub { color: #999; font-size: 9px; }
+    p { margin: 4px 0; }
+</style>
+</head>
+<body>
+    <h1>{{ resume.personal_info.full_name }}</h1>
+    <div class="contact">
+        {{ resume.personal_info.email }} &nbsp;·&nbsp; {{ resume.personal_info.phone }} &nbsp;·&nbsp; {{ resume.personal_info.location }}
+        {% if resume.personal_info.linkedin %}<br>{{ resume.personal_info.linkedin }}{% endif %}
+        {% if resume.personal_info.github %} &nbsp;·&nbsp; {{ resume.personal_info.github }}{% endif %}
+    </div>
+
+    {% if resume.personal_info.summary %}
+    <p>{{ resume.personal_info.summary }}</p>
+    {% endif %}
+
+    {% if resume.experience.all %}
+    <h2>Experience</h2>
+    {% for exp in resume.experience.all %}
+    <div class="item">
+        <div class="item-title">{{ exp.role }}, {{ exp.company }}</div>
+        <div class="item-sub">{{ exp.duration }}</div>
+        <p>{{ exp.description }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if resume.education.all %}
+    <h2>Education</h2>
+    {% for edu in resume.education.all %}
+    <div class="item">
+        <div class="item-title">{{ edu.degree }}, {{ edu.institution }}</div>
+        <div class="item-sub">{{ edu.year }} {% if edu.score %}| {{ edu.score }}{% endif %}</div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if resume.projects.all %}
+    <h2>Projects</h2>
+    {% for project in resume.projects.all %}
+    <div class="item">
+        <div class="item-title">{{ project.title }}</div>
+        <div class="item-sub">{{ project.tech_stack }}</div>
+        <p>{{ project.description }}</p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if resume.skills.all %}
+    <h2>Skills</h2>
+    <p>{% for skill in resume.skills.all %}{{ skill.name }}{% if not forloop.last %} · {% endif %}{% endfor %}</p>
+    {% endif %}
+
+   {% if resume.certifications.all %}
+    <h2>Certifications</h2>
+    {% for cert in resume.certifications.all %}
+    <p>{{ cert.name }} {% if cert.issuer %}— {{ cert.issuer }}{% endif %} {% if cert.year %}({{ cert.year }}){% endif %}</p>
+    {% endfor %}
+    {% endif %}
+
+    {% if resume.achievements.all %}
+    <h2>Achievements</h2>
+    {% for a in resume.achievements.all %}
+    <p>{{ a.title }}</p>
+    {% endfor %}
+    {% endif %}
+
+    {% if resume.languages.all %}
+    <h2>Languages</h2>
+    <p>{% for lang in resume.languages.all %}{{ lang.name }}{% if lang.proficiency %} ({{ lang.proficiency }}){% endif %}{% if not forloop.last %} · {% endif %}{% endfor %}</p>
+    {% endif %}
+</body>
+</html>

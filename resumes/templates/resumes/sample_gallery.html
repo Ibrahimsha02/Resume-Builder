@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Choose a Sample Resume{% endblock %}
+
+{% block content %}
+    <h1>Choose a Sample Resume</h1>
+    <p style="color:var(--slate); margin-bottom:30px;">Pick one close to your field, then customize every detail with your own information.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:20px;">
+        {% for key, sample in samples.items %}
+        <a href="{% url 'use_sample_resume' key %}" class="feature-card" style="display:block; padding:18px; border-bottom:none; text-align:left;">
+            <img src="{% static 'images/template-'|add:sample.template|add:'.svg' %}" alt="{{ sample.label }}" style="width:100%; border-radius:4px; margin-bottom:12px;">
+            <strong style="display:block; margin-bottom:4px;">{{ sample.label }}</strong>
+            <span class="template-badge badge-{{ sample.template }}">{{ sample.template }}</span>
+        </a>
+        {% endfor %}
+    </div>
+{% endblock %}

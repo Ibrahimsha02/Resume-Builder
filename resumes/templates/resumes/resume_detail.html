@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}{{ resume.title }}{% endblock %}
+
+{% block content %}
+    <div class="detail-actions">
+        <a href="{% url 'dashboard' %}">← Dashboard</a>
+        <a href="{% url 'resume_pdf' resume.id %}">📄 Download PDF</a>
+        <a href="{% url 'edit_resume' resume.id %}">✏️ Edit</a>
+        <a href="{% url 'delete_resume' resume.id %}">🗑️ Delete</a>
+    </div>
+
+    <h1>{{ resume.title }}</h1>
+
+    <h2>Personal Info</h2>
+    <div class="field-row"><strong>Name:</strong> {{ resume.personal_info.full_name }}</div>
+    <div class="field-row"><strong>Email:</strong> {{ resume.personal_info.email }}</div>
+    <div class="field-row"><strong>Phone:</strong> {{ resume.personal_info.phone }}</div>
+    <div class="field-row"><strong>Location:</strong> {{ resume.personal_info.location }}</div>
+    <div class="field-row"><strong>LinkedIn:</strong> {{ resume.personal_info.linkedin }}</div>
+    <div class="field-row"><strong>GitHub:</strong> {{ resume.personal_info.github }}</div>
+    <div class="field-row"><strong>Summary:</strong> {{ resume.personal_info.summary }}</div>
+
+    <h2>Education</h2>
+    <ul class="clean-list">
+    {% for edu in resume.education.all %}
+        <li>{{ edu.degree }} — {{ edu.institution }} ({{ edu.year }}) {{ edu.score }}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Experience</h2>
+    <ul class="clean-list">
+    {% for exp in resume.experience.all %}
+        <li><strong>{{ exp.role }}</strong> at {{ exp.company }} ({{ exp.duration }})<br>{{ exp.description }}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Skills</h2>
+    <div>
+    {% for skill in resume.skills.all %}
+        <span class="skill-pill">{{ skill.name }}</span>
+    {% endfor %}
+    </div>
+
+    <h2>Projects</h2>
+    <ul class="clean-list">
+    {% for project in resume.projects.all %}
+        <li><strong>{{ project.title }}</strong> — {{ project.tech_stack }}<br>{{ project.description }}<br>
+        {% if project.link %}<a href="{{ project.link }}">{{ project.link }}</a>{% endif %}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Certifications</h2>
+    <ul class="clean-list">
+    {% for cert in resume.certifications.all %}
+        <li>{{ cert.name }} — {{ cert.issuer }} ({{ cert.year }})</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Achievements</h2>
+    <ul class="clean-list">
+    {% for achievement in resume.achievements.all %}
+        <li>{{ achievement.title }}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Languages</h2>
+    <ul class="clean-list">
+    {% for lang in resume.languages.all %}
+        <li>{{ lang.name }} {% if lang.proficiency %}— {{ lang.proficiency }}{% endif %}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
